@@ -19,5 +19,5 @@ Afterwards the proxy can be started like this::
 
  python brick-mqtt-proxy.py
 
-See more information see:
+For more information see:
 http://www.tinkerforge.com/en/doc/Software/Brick_MQTT_Proxy.html
