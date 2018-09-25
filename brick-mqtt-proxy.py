@@ -31,7 +31,6 @@ ENUMERATE_INTERVAL = 15.0 # seconds
 
 import argparse
 import json
-import struct
 import sys
 import time
 import threading
@@ -85,6 +84,7 @@ from tinkerforge.bricklet_laser_range_finder import BrickletLaserRangeFinder
 from tinkerforge.bricklet_lcd_16x2 import BrickletLCD16x2
 from tinkerforge.bricklet_lcd_20x4 import BrickletLCD20x4
 from tinkerforge.bricklet_led_strip import BrickletLEDStrip
+from tinkerforge.bricklet_led_strip_v2 import BrickletLEDStripV2
 from tinkerforge.bricklet_line import BrickletLine
 from tinkerforge.bricklet_linear_poti import BrickletLinearPoti
 from tinkerforge.bricklet_load_cell import BrickletLoadCell
@@ -1193,6 +1193,19 @@ class BrickletLCD20x4Proxy(DeviceProxy):
 class BrickletLEDStripProxy(DeviceProxy):
     DEVICE_CLASS = BrickletLEDStrip
     TOPIC_PREFIX = 'bricklet/led_strip'
+    GETTER_SPECS = [('get_rgb_values', None, 'rgb_values', None),
+                    ('get_frame_duration', None, 'frame_duration', 'duration'),
+                    ('get_supply_voltage', None, 'supply_voltage', 'voltage'),
+                    ('get_clock_frequency', None, 'clock_frequency', 'frequency'),
+                    ('get_chip_type', None, 'chip_type', 'chip')]
+    SETTER_SPECS = [('set_rgb_values', 'rgb_values/set', ['index', 'length', 'r', 'g', 'b']),
+                    ('set_frame_duration', 'frame_duration/set', ['duration']),
+                    ('set_clock_frequency', 'clock_frequency/set', ['frequency']),
+                    ('set_chip_type', 'chip_type/set', ['chip'])]
+
+class BrickletLEDStripV2Proxy(DeviceProxy):
+    DEVICE_CLASS = BrickletLEDStripV2
+    TOPIC_PREFIX = 'bricklet/led_strip_v2'
     GETTER_SPECS = [('get_rgb_values', None, 'rgb_values', None),
                     ('get_frame_duration', None, 'frame_duration', 'duration'),
                     ('get_supply_voltage', None, 'supply_voltage', 'voltage'),

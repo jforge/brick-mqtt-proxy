@@ -1,1 +1,5 @@
 .idea
+.project
+.pydevproject
+.settings
+venv
