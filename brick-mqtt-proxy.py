@@ -1206,15 +1206,26 @@ class BrickletLEDStripProxy(DeviceProxy):
 class BrickletLEDStripV2Proxy(DeviceProxy):
     DEVICE_CLASS = BrickletLEDStripV2
     TOPIC_PREFIX = 'bricklet/led_strip_v2'
-    GETTER_SPECS = [('get_rgb_values', None, 'rgb_values', None),
+    GETTER_SPECS = [('get_led_values', None, 'led_values', None),
                     ('get_frame_duration', None, 'frame_duration', 'duration'),
                     ('get_supply_voltage', None, 'supply_voltage', 'voltage'),
                     ('get_clock_frequency', None, 'clock_frequency', 'frequency'),
-                    ('get_chip_type', None, 'chip_type', 'chip')]
-    SETTER_SPECS = [('set_rgb_values', 'rgb_values/set', ['index', 'length', 'r', 'g', 'b']),
+                    ('get_chip_type', None, 'chip_type', 'chip'),
+                    ('get_channel_mapping', None, 'channel_mapping', 'mapping'),
+                    ('get_status_led_config', None, 'status_led_config', 'config'),
+                    ('get_chip_temperature', None, 'chip_temperature', 'temperature')]
+    SETTER_SPECS = [(None, 'get_led_values/set', ['index', 'length'], {'getter_name': 'get_led_values', 'getter_publish_topic': 'led_values', 'getter_return_value': 'value'}),
+                    ('set_led_values', 'led_values/set', ['index', 'value']),
                     ('set_frame_duration', 'frame_duration/set', ['duration']),
                     ('set_clock_frequency', 'clock_frequency/set', ['frequency']),
-                    ('set_chip_type', 'chip_type/set', ['chip'])]
+                    ('set_chip_type', 'chip_type/set', ['chip']),
+                    ('set_channel_mapping', 'channel_mapping/set', ['mapping']),
+                    ('set_status_led_config', 'status_led_config/set', ['config'])]
+
+    # Arguments required for a getter must be published to "<GETTER-NAME>/set"
+    # topic which will execute the getter with the provided arguments.
+    # The output of the getter then will be published on the "<GETTER-NAME>"
+    # topic.
 
 class BrickletLineProxy(DeviceProxy):
     DEVICE_CLASS = BrickletLine
